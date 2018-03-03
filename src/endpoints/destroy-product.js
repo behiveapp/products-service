@@ -1,13 +1,13 @@
-const Seller = require('../lib/model/seller');
+const Product = require('../lib/model/product');
 
-const destroySeller = async (req, res) => {
+const destroyProduct = async (req, res) => {
   const {body: requestBody} = req;
 
   try{
-    const seller =  await Seller.findOne({identifier: req.params.id});
-    seller.remove();
+    const product =  await Product.findOne({identifier: req.params.id});
+    product.remove();
 
-    res.json(seller);
+    res.json(product);
   }catch(err){
     const errStatusCode = err.status || 500;
     const errType = err.name || 'ErrorUnknown';
@@ -20,5 +20,5 @@ const destroySeller = async (req, res) => {
 };
 
 module.exports = {
-  destroySeller
+  destroyProduct
 }

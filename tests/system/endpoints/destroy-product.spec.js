@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../../../src/app');
-const {initializeSellers, clearSellers, mockSellers, connectMongo} = require('../../utils/sellers');
+const {initializeProducts, clearProducts, mockProducts, connectMongo} = require('../../utils/products');
 const mongoose = require('mongoose');
 
 describe('DELETE /:id endpoint', () => {
@@ -9,26 +9,26 @@ describe('DELETE /:id endpoint', () => {
   });
 
   beforeEach(async () => {
-    await clearSellers();
-    await initializeSellers();
+    await clearProducts();
+    await initializeProducts();
   });
 
   afterEach(async () => {
-    await clearSellers();
+    await clearProducts();
   });
 
-  it('Should return 200 status if seller was destroyed', async () => {
+  it('Should return 200 status if product was destroyed', async () => {
     const response = await request(app).delete('/02002002000226');
     expect(response.statusCode).toBe(200);
   });
   
-  it('Should destroy seller', async () => {
+  it('Should destroy product', async () => {
     await request(app).delete('/02002002000226');
     const response = await request(app).get('/02002002000226');
     expect(response.statusCode).toBe(404);
   });
 
-  it('Should return 404 status if seller wasn`t found', async () => {
+  it('Should return 404 status if product wasn`t found', async () => {
     const response = await request(app).delete('/foo');
     expect(response.statusCode).toBe(404);
   });

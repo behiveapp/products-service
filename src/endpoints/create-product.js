@@ -1,11 +1,11 @@
-const Seller = require('../lib/model/seller');
+const Product = require('../lib/model/product');
 
-const createSeller = async (req, res) => {
-  const seller = new Seller(req.body);
+const createProduct = async (req, res) => {
+  const product = new Product(req.body);
   
   try{
-    await seller.save();
-    res.json(seller._document);
+    await product.save();
+    res.json(product._document);
   } catch(err){
     const errStatusCode = err.status || 500;
     const errType = err.name || 'ErrorUnknown';
@@ -18,5 +18,5 @@ const createSeller = async (req, res) => {
 };
 
 module.exports = {
-  createSeller
+  createProduct
 }
