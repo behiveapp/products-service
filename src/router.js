@@ -1,15 +1,15 @@
 const express = require('express');
-const {getSellers} = require('./endpoints/get-sellers');
-const {getSeller} = require('./endpoints/get-seller');
-const {createSeller} = require('./endpoints/create-seller');
-const {updateSeller} = require('./endpoints/update-seller');
-const {destroySeller} = require('./endpoints/destroy-seller');
+const {getProducts} = require('./endpoints/get-products');
+const {getProduct} = require('./endpoints/get-product');
+const {createProduct} = require('./endpoints/create-product');
+const {updateProduct} = require('./endpoints/update-product');
+const {destroyProduct} = require('./endpoints/destroy-product');
 const router = express.Router();
 
-router.get('/', getSellers);
-router.get('/:id', getSeller);
-router.post('/', createSeller);
-router.put('/:id', updateSeller);
-router.delete('/:id', destroySeller);
+router.get('/', getProducts);
+router.get('/:id', getProduct);
+router.post('/', createProduct);
+router.put('/:id', updateProduct);
+router.delete('/:id', destroyProduct);
 
 module.exports = router;

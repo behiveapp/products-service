@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../../../src/app');
-const {initializeSellers, clearSellers, mockSellers, connectMongo} = require('../../utils/sellers');
+const {initializeProducts, clearProducts, mockProducts, connectMongo} = require('../../utils/products');
 const mongoose = require('mongoose');
 
 describe('GET /:id endpoint', () => {
@@ -9,16 +9,16 @@ describe('GET /:id endpoint', () => {
   });
 
   beforeEach(async () => {
-    await clearSellers();
-    await initializeSellers();
+    await clearProducts();
+    await initializeProducts();
   });
 
-  it('Should return 200 status if seller was found', async () => {
+  it('Should return 200 status if product was found', async () => {
     const response = await request(app).get('/02002002000226');
     expect(response.statusCode).toBe(200);
   });
 
-  it('Should return the correct seller if it was found', async () => {
+  it('Should return the correct product if it was found', async () => {
     const response = await request(app).get('/02002002000226');
     const {full_name, short_name, identifier} = response.body;
     
@@ -27,7 +27,7 @@ describe('GET /:id endpoint', () => {
     expect(identifier).toBe('02002002000226');
   });
 
-  it('Should return the correct seller if it wasn`t found', async () => {
+  it('Should return the correct product if it wasn`t found', async () => {
     const response = await request(app).get('/123');
     expect(response.statusCode).toBe(404);
   });
