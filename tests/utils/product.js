@@ -1,8 +1,8 @@
-const Seller = require('../../src/lib/model/seller');
+const Product = require('../../src/lib/model/product');
 const mongoose = require('mongoose');
 
 
-const initializeSellers = () => {
+const initializeProducts = () => {
   const data = [{
     full_name: 'Império das Grifes LTDA',
     short_name: 'Império das Grifes',
@@ -14,17 +14,17 @@ const initializeSellers = () => {
     identifier: '02002002000226'
   }];
 
-  return Promise.all(data.map(async (seller) => {
-    return new Seller(seller).save()
+  return Promise.all(data.map(async (product) => {
+    return new Product(product).save()
   }));
 }
 
 
-const clearSellers = async () => {
-  return Seller.collection.remove().exec();
+const clearProducts = async () => {
+  return Product.collection.remove().exec();
 }
 
-const mockSellers = [{
+const mockProducts = [{
   full_name: 'Império das Grifes LTDA',
   short_name: 'Império das Grifes',
   identifier: '01001001000113'
@@ -36,13 +36,13 @@ const mockSellers = [{
 }];
 
 const connectMongo = () => {
-  const {MONGO_URL = 'localhost:3001/sellers'} = process.env;
+  const {MONGO_URL = 'localhost:3001/products'} = process.env;
   mongoose.connect(MONGO_URL);
 }
 
 module.exports = {
-  initializeSellers,
-  clearSellers,
-  mockSellers,
+  initializeProducts,
+  clearProducts,
+  mockProducts,
   connectMongo
 }

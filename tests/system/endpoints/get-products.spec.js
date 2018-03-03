@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../../../src/app');
-const {initializeSellers, clearSellers, mockSellers, connectMongo} = require('../../utils/sellers');
+const {initializeProducts, clearProducts, mockProducts, connectMongo} = require('../../utils/products');
 const mongoose = require('mongoose');
 
 describe('GET / endpoint', () => {
@@ -9,8 +9,8 @@ describe('GET / endpoint', () => {
   });
 
   beforeEach(async () => {
-    await clearSellers();
-    await initializeSellers();
+    await clearProducts();
+    await initializeProducts();
   });
 
   it('Should return 200 status', async () => {

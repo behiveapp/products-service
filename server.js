@@ -4,7 +4,7 @@ const numCPUs = require('os').cpus().length;
 const app = require('./src/app');
 
 const connectMongo = () => {
-  const {MONGO_URL = 'localhost:3001/sellers'} = process.env;
+  const {MONGO_URL = 'localhost:3001/products'} = process.env;
   return mongoose.connect(MONGO_URL);
 }
 

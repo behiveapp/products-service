@@ -1,6 +1,6 @@
 const Record = require('./record');
 
-class Seller extends Record{
+class Product extends Record{
   static get schema(){
     return {
       full_name: String,
@@ -10,4 +10,4 @@ class Seller extends Record{
   }
 }
 
-module.exports = Seller;
+module.exports = Product;

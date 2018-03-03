@@ -1,9 +1,9 @@
-const Seller = require('../lib/model/seller');
+const Product = require('../lib/model/product');
 
-const getSeller = async (req, res) => {
+const getProduct = async (req, res) => {
   try{
-    const seller = await Seller.findOne({identifier: req.params.id});
-    res.json(seller);
+    const product = await Product.findOne({identifier: req.params.id});
+    res.json(product);
   }catch(err){
     const errStatusCode = err.status || 500;
     const errType = err.name || 'ErrorUnknown';
@@ -17,5 +17,5 @@ const getSeller = async (req, res) => {
 };
 
 module.exports = {
-  getSeller
+  getProduct
 }

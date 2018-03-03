@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../../../src/app');
-const {initializeSellers, clearSellers, mockSellers, connectMongo} = require('../../utils/sellers');
+const {initializeProducts, clearProducts, mockProducts, connectMongo} = require('../../utils/products');
 const mongoose = require('mongoose');
 
 describe('POST / endpoint', () => {
@@ -9,19 +9,19 @@ describe('POST / endpoint', () => {
   });
 
   beforeEach(async () => {
-    await clearSellers();
+    await clearProducts();
   });
 
   afterEach(async () => {
-    await clearSellers();
+    await clearProducts();
   });
 
-  it('Should return 200 status if seller was created', async () => {
+  it('Should return 200 status if product was created', async () => {
     const response = await request(app).post('/').send({identifier: '01001001000113'});
     expect(response.statusCode).toBe(200);
   });
 
-  it('Should return the correct seller if it was found', async () => {
+  it('Should return the correct product if it was found', async () => {
     const response = await request(app).post('/').send({
       identifier: '02002002000226',
       full_name:'Computei Consultoria SA',

@@ -1,7 +1,7 @@
 {
-  "name": "sellers-service",
+  "name": "products-service",
   "version": "1.0.0",
-  "description": "Seller service at Behive",
+  "description": "Product service at Behive",
   "author": "Edson Júnior <ejunior.batista@gmail.com>",
   "main": "server.js",
   "scripts": {

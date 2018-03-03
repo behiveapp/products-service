@@ -1,7 +1,7 @@
 version: '3'
 services:
   app:
-    container_name: sellers-service
+    container_name: products-service
     build: .
     volumes:
       - ".:/app"
@@ -14,11 +14,11 @@ services:
     environment:
       - PORT=3000
       - NODE_ENV=development
-      - MONGO_URL=mongodb://mongo/sellers
+      - MONGO_URL=mongodb://mongo/products
     depends_on:
       - mongo
   mongo:
-    container_name: sellers-mongo
+    container_name: products-mongo
     image: mongo
     volumes:
       - mongo_data:/data/db
