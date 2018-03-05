@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../../../src/app');
-const {initializeProducts, clearProducts, mockProducts, connectMongo} = require('../../utils/products');
+const {initializeProducts, clearProducts, connectMongo} = require('../../utils/products');
 const mongoose = require('mongoose');
 
 describe('GET / endpoint', () => {

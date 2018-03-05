@@ -1,5 +1,5 @@
 const Product = require('../../../../src/lib/model/product');
-const {initializeProducts, clearProducts, mockProducts, connectMongo} = require('../../../utils/products');
+const {initializeProducts, clearProducts, connectMongo} = require('../../../utils/products');
 const mongoose = require('mongoose');
 
 describe('Product Model', () => {

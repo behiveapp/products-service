@@ -4,14 +4,19 @@ const mongoose = require('mongoose');
 
 const initializeProducts = () => {
   const data = [{
-    full_name: 'Império das Grifes LTDA',
-    short_name: 'Império das Grifes',
-    identifier: '01001001000113'
+    code: 'PROD01',
+    name: 'Product 1',
+    seller_identifier: '01001001000113'
   },
   {
-    full_name: 'Computei Consultoria SA',
-    short_name: 'Computei Consultoria',
-    identifier: '02002002000226'
+    code: 'PROD02',
+    name: 'Product 2',
+    seller_identifier: '02002002000226'
+  },
+  {
+    code: 'PROD03',
+    name: 'Product 3',
+    seller_identifier: '02002002000226'
   }];
 
   return Promise.all(data.map(async (product) => {
@@ -24,17 +29,6 @@ const clearProducts = async () => {
   return Product.collection.remove().exec();
 }
 
-const mockProducts = [{
-  full_name: 'Império das Grifes LTDA',
-  short_name: 'Império das Grifes',
-  identifier: '01001001000113'
-},
-{
-  full_name: 'Computei Consultoria SA',
-  short_name: 'Computei Consultoria',
-  identifier: '02002002000226'
-}];
-
 const connectMongo = () => {
   const {MONGO_URL = 'localhost:3001/products'} = process.env;
   mongoose.connect(MONGO_URL);
@@ -43,6 +37,5 @@ const connectMongo = () => {
 module.exports = {
   initializeProducts,
   clearProducts,
-  mockProducts,
   connectMongo
 }
