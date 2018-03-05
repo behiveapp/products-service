@@ -4,7 +4,7 @@ const destroyProduct = async (req, res) => {
   const {body: requestBody} = req;
 
   try{
-    const product =  await Product.findOne({identifier: req.params.id});
+    const product =  await Product.findOne({code: req.params.id});
     product.remove();
 
     res.json(product);

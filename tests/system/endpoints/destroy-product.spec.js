@@ -18,13 +18,13 @@ describe('DELETE /:id endpoint', () => {
   });
 
   it('Should return 200 status if product was destroyed', async () => {
-    const response = await request(app).delete('/02002002000226');
+    const response = await request(app).delete('/PROD01');
     expect(response.statusCode).toBe(200);
   });
   
   it('Should destroy product', async () => {
-    await request(app).delete('/02002002000226');
-    const response = await request(app).get('/02002002000226');
+    await request(app).delete('/PROD01');
+    const response = await request(app).get('/PROD01');
     expect(response.statusCode).toBe(404);
   });
 

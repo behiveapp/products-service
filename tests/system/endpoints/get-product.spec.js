@@ -14,17 +14,17 @@ describe('GET /:id endpoint', () => {
   });
 
   it('Should return 200 status if product was found', async () => {
-    const response = await request(app).get('/02002002000226');
+    const response = await request(app).get('/PROD01');
     expect(response.statusCode).toBe(200);
   });
 
   it('Should return the correct product if it was found', async () => {
-    const response = await request(app).get('/02002002000226');
-    const {full_name, short_name, identifier} = response.body;
+    const response = await request(app).get('/PROD02');
+    const {name, code, seller_identifier} = response.body;
     
-    expect(full_name).toBe('Computei Consultoria SA');
-    expect(short_name).toBe('Computei Consultoria');
-    expect(identifier).toBe('02002002000226');
+    expect(name).toBe('Product 2');
+    expect(code).toBe('PROD02');
+    expect(seller_identifier).toBe('02002002000226');
   });
 
   it('Should return the correct product if it wasn`t found', async () => {

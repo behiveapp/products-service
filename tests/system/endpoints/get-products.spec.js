@@ -21,6 +21,6 @@ describe('GET / endpoint', () => {
   it('Should return the correct json', async () => {
     const response = await request(app).get('/');
 
-    expect(response.body.length).toBe(2);
+    expect(response.body.length).toBe(3);
   });
 });
