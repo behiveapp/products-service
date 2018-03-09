@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../../../src/app');
-const {initializeProducts, clearProducts, mockProducts, connectMongo} = require('../../utils/products');
+const {initializeProducts, clearProducts, connectMongo} = require('../../utils/products');
 const mongoose = require('mongoose');
 
 describe('DELETE /:id endpoint', () => {
@@ -18,13 +18,16 @@ describe('DELETE /:id endpoint', () => {
   });
 
   it('Should return 200 status if product was destroyed', async () => {
-    const response = await request(app).delete('/02002002000226');
+    const {body: products} = await request(app).get('/');
+    const response = await request(app).delete(`/${products[0]._id}`);
     expect(response.statusCode).toBe(200);
   });
   
   it('Should destroy product', async () => {
-    await request(app).delete('/02002002000226');
-    const response = await request(app).get('/02002002000226');
+    const {body: products} = await request(app).get('/');
+    await request(app).delete(`/${products[0]._id}`);
+
+    const response = await request(app).get(`/${products[0]._id}`);
     expect(response.statusCode).toBe(404);
   });
 

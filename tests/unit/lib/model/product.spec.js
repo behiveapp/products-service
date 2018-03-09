@@ -1,5 +1,5 @@
 const Product = require('../../../../src/lib/model/product');
-const {initializeProducts, clearProducts, mockProducts, connectMongo} = require('../../../utils/products');
+const {initializeProducts, clearProducts, connectMongo} = require('../../../utils/products');
 const mongoose = require('mongoose');
 
 describe('Product Model', () => {
@@ -12,23 +12,23 @@ describe('Product Model', () => {
     await initializeProducts();
   });
 
-  describe('#getAll', async () => {
+  describe('#find', async () => {
     it('Should return all products', async () => {
       const products = await Product.collection.find().exec();
       
-      expect(products.length).toBe(2);
+      expect(products.length).toBe(3);
     });
     
   });
 
-  describe('#find', async () => {
+  describe('#findOne', async () => {
     it("Should return the correct product if it exists", async () => {
-      const product = await Product.collection.findOne({identifier: '01001001000113'}).exec();
-      const {full_name, short_name, identifier} = product;
-
-      expect(full_name).toBe('Império das Grifes LTDA');
-      expect(short_name).toBe('Império das Grifes');
-      expect(identifier).toBe('01001001000113');
+      const product = await Product.collection.findOne({code: 'PROD01'}).exec();
+      const {name, code, seller_identifier} = product;
+    
+      expect(name).toBe('Product 1');
+      expect(code).toBe('PROD01');
+      expect(seller_identifier).toBe('01001001000113');
     });
 
     it("Should return null if product does not exist", async () => {
@@ -37,5 +37,26 @@ describe('Product Model', () => {
       expect(product).toBeNull();
     });
     
+  });
+
+  describe('#save', async () => {
+    it("Should save product correctly", async () => {
+      const product = new Product({
+        seller_identifier: '02002002000226',
+        code:'PRODTEST',
+        name: 'Test Product'
+      });
+
+      await product.save();
+
+      const insertedProduct = await Product.findOne({code: 'PRODTEST'});
+      
+      const {name, code, seller_identifier} = insertedProduct;
+      
+      expect(name).toBe('Test Product');
+      expect(code).toBe('PRODTEST');
+      expect(seller_identifier).toBe('02002002000226');
+    });
+
   });
 });

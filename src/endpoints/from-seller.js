@@ -1,8 +1,8 @@
 const Product = require('../lib/model/product');
 
-const getProduct = async (req, res) => {
+const fromSeller = async (req, res) => {
   try{
-    const product = await Product.findById(req.params.id);
+    const product = await Product.find({seller_identifier: req.params.id});
     res.json(product);
   }catch(err){
     console.log(err);
@@ -18,5 +18,5 @@ const getProduct = async (req, res) => {
 };
 
 module.exports = {
-  getProduct
+  fromSeller
 }

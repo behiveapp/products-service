@@ -4,7 +4,7 @@ const updateProduct = async (req, res) => {
   const {body: requestBody} = req;
 
   try{
-    const product =  await Product.findOne({identifier: req.params.id});
+    const product =  await Product.findById( req.params.id);
     Object.keys(requestBody).forEach(field => {product[field] = requestBody[field]});
     product.save();
 

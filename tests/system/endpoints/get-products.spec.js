@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../../../src/app');
-const {initializeProducts, clearProducts, mockProducts, connectMongo} = require('../../utils/products');
+const {initializeProducts, clearProducts, connectMongo} = require('../../utils/products');
 const mongoose = require('mongoose');
 
 describe('GET / endpoint', () => {
@@ -21,6 +21,6 @@ describe('GET / endpoint', () => {
   it('Should return the correct json', async () => {
     const response = await request(app).get('/');
 
-    expect(response.body.length).toBe(2);
+    expect(response.body.length).toBe(3);
   });
 });

@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../../../src/app');
-const {initializeProducts, clearProducts, mockProducts, connectMongo} = require('../../utils/products');
+const {initializeProducts, clearProducts, connectMongo} = require('../../utils/products');
 const mongoose = require('mongoose');
 
 describe('GET /:id endpoint', () => {
@@ -14,17 +14,20 @@ describe('GET /:id endpoint', () => {
   });
 
   it('Should return 200 status if product was found', async () => {
-    const response = await request(app).get('/02002002000226');
+    const {body: products} = await request(app).get('/');
+    const response = await request(app).get(`/${products[0]._id}`);
     expect(response.statusCode).toBe(200);
   });
 
   it('Should return the correct product if it was found', async () => {
-    const response = await request(app).get('/02002002000226');
-    const {full_name, short_name, identifier} = response.body;
+    const {body: products} = await request(app).get('/');
+    const product = products.find(p => (p.code === 'PROD01'));
+    const response = await request(app).get(`/${product._id}`);
+    const {name, code, seller_identifier} = response.body;
     
-    expect(full_name).toBe('Computei Consultoria SA');
-    expect(short_name).toBe('Computei Consultoria');
-    expect(identifier).toBe('02002002000226');
+    expect(name).toBe('Product 1');
+    expect(code).toBe('PROD01');
+    expect(seller_identifier).toBe('01001001000113');
   });
 
   it('Should return the correct product if it wasn`t found', async () => {
