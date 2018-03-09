@@ -19,14 +19,14 @@ const initializeProducts = () => {
     seller_identifier: '02002002000226'
   }];
 
-  return Promise.all(data.map(async (product) => {
+  return Promise.all(data.map((product) => {
     return new Product(product).save()
   }));
 }
 
 
 const clearProducts = async () => {
-  return Product.collection.remove().exec();
+  return await Product.collection.remove().exec();
 }
 
 const connectMongo = () => {

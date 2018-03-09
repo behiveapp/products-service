@@ -14,17 +14,20 @@ describe('GET /:id endpoint', () => {
   });
 
   it('Should return 200 status if product was found', async () => {
-    const response = await request(app).get('/PROD01');
+    const {body: products} = await request(app).get('/');
+    const response = await request(app).get(`/${products[0]._id}`);
     expect(response.statusCode).toBe(200);
   });
 
   it('Should return the correct product if it was found', async () => {
-    const response = await request(app).get('/PROD02');
+    const {body: products} = await request(app).get('/');
+    const product = products.find(p => (p.code === 'PROD01'));
+    const response = await request(app).get(`/${product._id}`);
     const {name, code, seller_identifier} = response.body;
     
-    expect(name).toBe('Product 2');
-    expect(code).toBe('PROD02');
-    expect(seller_identifier).toBe('02002002000226');
+    expect(name).toBe('Product 1');
+    expect(code).toBe('PROD01');
+    expect(seller_identifier).toBe('01001001000113');
   });
 
   it('Should return the correct product if it wasn`t found', async () => {

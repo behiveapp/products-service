@@ -5,6 +5,7 @@ const fromSeller = async (req, res) => {
     const product = await Product.find({seller_identifier: req.params.id});
     res.json(product);
   }catch(err){
+    console.log(err);
     const errStatusCode = err.status || 500;
     const errType = err.name || 'ErrorUnknown';
 

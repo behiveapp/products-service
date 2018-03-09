@@ -22,6 +22,13 @@ class Record {
     return Promise.resolve(document);
   }
 
+  static async findById(id){
+    let document;
+    if (id.match(/^[0-9a-fA-F]{24}$/)) document = await this.collection.findById(id).exec();
+    if(!document) throw new NotFoundMongoException(this.name, id);
+    return Promise.resolve(document);
+  }
+
   static update(query, values){
     try{
       return this.collection.update(query, values).exec();
