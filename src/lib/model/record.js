@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosastic = require('mongoosastic');
 const {NotFoundMongoException, ValidateMongoException} = require('../exceptions/exceptions');
 
 class Record {
@@ -8,7 +9,20 @@ class Record {
   }
 
   static get collection(){
-    collections[this.name] = collections[this.name] || mongoose.model(this.name, this.schema)
+    const { ELASTICSEARCH_HOST = '127.0.0.1', ELASTICSEARCH_PORT = '9200' } = process.env;
+    const schema = new mongoose.Schema(this.schema);
+    schema.plugin(mongoosastic, {host: ELASTICSEARCH_HOST, port: ELASTICSEARCH_PORT});
+    collections[this.name] = collections[this.name] || mongoose.model(this.name, schema);
+    collections[this.name].createMapping({
+      "analysis" : {
+        "analyzer":{
+          "content":{
+            "type":"custom",
+            "tokenizer":"keyword"
+          }
+        }
+      }
+    },(err, mapping) => {});
     return collections[this.name];
   }
 
