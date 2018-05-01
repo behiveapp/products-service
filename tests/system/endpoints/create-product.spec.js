@@ -17,7 +17,15 @@ describe('POST / endpoint', () => {
   });
 
   it('Should return 200 status if product was created', async () => {
-    const response = await request(app).post('/').send({seller_identifier: '01001001000113', categories: ["Category1"]});
+    const response = await request(app).post('/').send({
+      seller_identifier: '02002002000226',
+      code:'PRODTEST',
+      name: 'Test Product',
+      categories: ['Category1', 'Category2'],
+      price: 29.9,
+      description: 'A brief description of the product',
+    });
+    
     expect(response.statusCode).toBe(200);
   });
 
@@ -26,15 +34,19 @@ describe('POST / endpoint', () => {
       seller_identifier: '02002002000226',
       code:'PRODTEST',
       name: 'Test Product',
-      categories: ['Category1', 'Category2']
+      categories: ['Category1', 'Category2'],
+      price: 29.9,
+      description: 'A brief description of the product',
     });
     
-    const {name, code, seller_identifier, categories} = response.body;
+    const {name, code, seller_identifier, categories, price, description} = response.body;
     
     expect(name).toBe('Test Product');
     expect(code).toBe('PRODTEST');
     expect(seller_identifier).toBe('02002002000226');
     expect(categories.length).toBe(2);
+    expect(price).toBe(29.9);
+    expect(description).toBe('A brief description of the product');
   });
 
   it('Should return 422 status if a required field wasn`t informed', async () => {

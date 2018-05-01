@@ -45,19 +45,23 @@ describe('Product Model', () => {
         seller_identifier: '02002002000226',
         code:'PRODTEST',
         name: 'Test Product',
-        categories: ['Category1', 'Category2']
+        categories: ['Category1', 'Category2'],
+        price: 29.9,
+        description: 'A brief description of the product'
       });
 
       await product.save();
 
       const insertedProduct = await Product.findOne({code: 'PRODTEST'});
       
-      const {name, code, seller_identifier, categories} = insertedProduct;
+      const {name, code, seller_identifier, categories, price, description} = insertedProduct;
       
       expect(name).toBe('Test Product');
       expect(code).toBe('PRODTEST');
       expect(seller_identifier).toBe('02002002000226');
       expect(categories.length).toBe(2);
+      expect(price).toBe(29.9);
+      expect(description).toBe('A brief description of the product');
     });
 
   });
